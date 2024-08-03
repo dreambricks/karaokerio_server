@@ -1,9 +1,17 @@
-from flask import Flask, jsonify, render_template
+from flask import Flask, jsonify, render_template, request
+from flask_socketio import SocketIO, emit
 import threading
 import socket
 import requests
 
 app = Flask(__name__)
+socketio = SocketIO(app)
+connected_users = []
+
+
+@app.route('/')
+def index():
+    return render_template('index.html')
 
 
 @app.route('/api', methods=['GET'])
@@ -19,8 +27,29 @@ def render_screen(screen_name):
         return jsonify({"error": str(e)}), 404
 
 
+@app.route('/send_message', methods=['GET'])
+def send_message():
+    message = "send message"
+    for user in connected_users:
+        socketio.emit('message', {'data': message}, room=user)
+
+    return jsonify({"message": "Message sent successfully"})
+
+
+@socketio.on('connect')
+def handle_connect():
+    print('Client connected')
+    connected_users.append(request.sid)
+
+
+@socketio.on('disconnect')
+def handle_disconnect():
+    print('Client disconnected')
+    connected_users.remove(request.sid)
+
+
 def run_flask():
-    app.run(host='0.0.0.0', port=5000)
+    socketio.run(app, host='0.0.0.0', port=5000, allow_unsafe_werkzeug=True)
 
 
 def run_udp_server():
@@ -40,11 +69,15 @@ def run_udp_server():
         try:
             response = requests.get(f"http://127.0.0.1:5000/screen/{screen_name}")
             if response.status_code == 200:
+                html_content = response.text
+                for user in connected_users:
+                    socketio.emit('render_html', {'html': html_content}, room=user)
                 sock.sendto(b'HTML rendered successfully', addr)
             else:
                 sock.sendto(b'Error rendering HTML', addr)
         except Exception as e:
             sock.sendto(f'Error: {str(e)}'.encode('utf-8'), addr)
+
 
 if __name__ == "__main__":
     flask_thread = threading.Thread(target=run_flask)
