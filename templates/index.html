@@ -1,33 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>WebSocket Test</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.3.2/socket.io.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', (event) => {
-            var socket = io();
-
-            socket.on('connect', function() {
-                console.log('Connected to server');
-            });
-
-            socket.on('message', function(msg) {
-                console.log('Message received: ' + msg.data);
-            });
-
-            socket.on('render_html', function(data) {
-                document.open();
-                document.write(data.html);
-                document.close();
-            });
-
-            socket.on('disconnect', function() {
-                console.log('Disconnected from server');
-            });
-        });
-    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SocketIO Example</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.js"></script>
 </head>
 <body>
-    <h1>WebSocket Test Page</h1>
+    <h1>Bem-vindo!</h1>
+    <script>
+        var socket = io();
+
+        socket.on('render_list', function() {
+            window.location.href = '/music-list.html';
+        });
+    </script>
 </body>
 </html>
