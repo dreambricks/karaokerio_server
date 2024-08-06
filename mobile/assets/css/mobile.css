@@ -1,0 +1,56 @@
+@font-face {
+  font-family: kallisto;
+  src: url("../font/kallisto-bold-italic/kallisto-bold-italic.woff2");
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: kallisto, sans-serif;
+}
+
+body {
+  background: url("../imgs/Backgorund_estrelas.png");
+  background-repeat: no-repeat;
+  width: 100%;
+  display: block;
+  height: 100vh;
+  background-size: cover;
+  background-position: right;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.container {
+  height: 100vh;
+  max-width: 90%;
+  margin: 0 auto;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  padding: 80px 0 30px;
+  box-sizing: border-box;
+}
+
+.alert-info {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.alert-info h1 {
+  font-size: 60px;
+  color: #69faed;
+}
+
+.alert-info h2 {
+  font-size: 50px;
+  color: white;
+  margin-top: 300px;
+  text-align: center;
+}
