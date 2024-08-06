@@ -1,4 +1,5 @@
 import qrcode
+import io
 
 
 def generate_qr_code(data):
@@ -10,9 +11,11 @@ def generate_qr_code(data):
     )
     qr.add_data(data)
     qr.make(fit=True)
+
     img = qr.make_image(fill_color="black", back_color="white")
-    return img
 
+    img_bytes = io.BytesIO()
+    img.save(img_bytes)
+    img_bytes.seek(0)
 
-
-
+    return img_bytes

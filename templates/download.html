@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Video</title>
+    <script>
+        function initiateDownload() {
+            window.location.href = "{{ url_for('download_video', filename=filename) }}";
+        }
+    </script>
+</head>
+<body onload="initiateDownload()">
+    <h1>Download Video</h1>
+    <p>Click the link below if your download does not start automatically:</p>
+    <a href="{{ url_for('download_video', filename=filename) }}">Download {{ filename }}</a>
+</body>
+</html>
