@@ -1,0 +1,22 @@
+@font-face {
+  font-family: kallisto;
+  src: url("../font/kallisto-bold-italic/kallisto-bold-italic.woff2");
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: kallisto, sans-serif;
+}
+
+body {
+  background: url("../imgs/sing.png");
+  background-repeat: no-repeat;
+  width: 100%;
+  display: block;
+  height: 100vh;
+  background-size: cover;
+  position: relative;
+  display: flex;
+  align-items: center;
+}

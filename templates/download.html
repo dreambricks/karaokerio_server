@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Download Video</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='mobile/assets/css/mobile.css') }}">
+    <title>Document</title>
     <script>
         function initiateDownload() {
             window.location.href = "{{ url_for('download_video', filename=filename) }}";
@@ -11,8 +12,15 @@
     </script>
 </head>
 <body onload="initiateDownload()">
-    <h1>Download Video</h1>
-    <p>Click the link below if your download does not start automatically:</p>
-    <a href="{{ url_for('download_video', filename=filename) }}">Download {{ filename }}</a>
+<div class="container">
+    <div class="alert-info">
+        <h1>Seu vídeo já está baixando.</h1>
+        <h2>OBRIGADO POR PARTICIPAR!</h2>
+        <p>Clique abaixo se o seu video não começou o download automaticamente</p>
+        <a href="{{ url_for('download_video', filename=filename) }}">Download {{ filename }}</a>
+
+    </div>
+</div>
 </body>
 </html>
+

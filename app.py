@@ -42,9 +42,9 @@ scheduler.add_job(remove_old_files, 'interval', minutes=2)
 scheduler.start()
 
 
-@app.route('/')
+@app.route('/sing')
 def index():
-    return render_template('index.html')
+    return render_template('tablet/cantar.html')
 
 
 @socketio.on('message')
@@ -60,17 +60,17 @@ def send_music_test():
     return "Message sent!"
 
 
-@app.route('/send_music', methods=['POST'])
-def send_music():
-    message = "start " + request.form["music"]
+@app.route('/send_music/<music>', methods=['GET'])
+def send_music(music):
+    message = "start " + music
     udp_sender.send(message)
     return "Message sent!"
 
 
-@app.route('/render_music_list')
+@app.route('/render_terms')
 def test_html():
-    socketio.emit('render_list')
-    return "Render music-list.html em todos os clientes!"
+    socketio.emit('render_terms')
+    return "Render terms.html em todos os clientes!"
 
 
 @app.route('/music-list')
@@ -84,7 +84,12 @@ def render_test_html():
         return None
     print(musics)
 
-    return render_template('music-list.html', musics=musics)
+    return render_template('tablet/music-list.html', musics=musics)
+
+
+@app.route('/terms')
+def terms_page():
+    return render_template('tablet/termos.html')
 
 
 @app.route('/qr')
