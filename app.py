@@ -3,10 +3,12 @@ from flask_socketio import SocketIO, emit
 from udp_sender import UDPSender
 from qrcodeaux import generate_qr_code
 import os
-import time
 from apscheduler.schedulers.background import BackgroundScheduler
 import parameters as pm
 from pathlib import Path
+import obswebsocket
+from obswebsocket import obsws, requests
+import time
 
 app = Flask(__name__)
 
@@ -130,6 +132,30 @@ def download_video(filename):
         return send_from_directory('static/videos', filename, as_attachment=True)
     except FileNotFoundError:
         abort(404, description="File not found")
+
+
+@app.route('/save_video')
+def save_video():
+    try:
+        ws = obsws('localhost', 4444, 'your_password')
+        ws.connect()
+        print("Conectado ao OBS WebSocket")
+
+        ws.call(requests.StartRecording())
+        print("Gravação iniciada")
+
+        time.sleep(10)
+        ws.call(requests.StopRecording())
+        print("Gravação parada")
+
+        ws.disconnect()
+        print("Desconectado do OBS WebSocket")
+
+    except obswebsocket.exceptions.ConnectionFailure as e:
+        print(f"Falha na conexão: {e}")
+    except Exception as e:
+        print(f"Ocorreu um erro: {e}")
+    return "Video Salvo"
 
 
 if __name__ == '__main__':
