@@ -9,6 +9,7 @@ from pathlib import Path
 import obswebsocket
 from obswebsocket import obsws, requests
 import time
+import random
 
 app = Flask(__name__)
 
@@ -113,7 +114,15 @@ def get_most_recent_file():
 
     most_recent_file = max(files, key=os.path.getmtime)
 
-    return most_recent_file.name
+    random_number = random.randint(10000, 99999)
+
+    new_name = f'estrelas_da_casa_{random_number}{most_recent_file.suffix}'
+
+    new_path = most_recent_file.parent / new_name
+
+    os.rename(most_recent_file, new_path)
+
+    return new_path.name
 
 
 @app.route('/download_video_page/<filename>')
