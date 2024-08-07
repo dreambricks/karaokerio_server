@@ -57,14 +57,14 @@ def handle_message(message):
 
 @app.route('/send_music_test', methods=['GET'])
 def send_music_test():
-    message = "start Fall-Out-Boy-Sugar-We_re-Goin-Down"
+    message = "start,Fall-Out-Boy-Sugar-We_re-Goin-Down"
     udp_sender.send(message)
     return "Message sent!"
 
 
 @app.route('/send_music/<music>', methods=['GET'])
 def send_music(music):
-    message = "start " + music
+    message = "start," + music
     udp_sender.send(message)
     return "Message sent!"
 
