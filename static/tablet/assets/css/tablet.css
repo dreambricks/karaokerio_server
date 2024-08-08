@@ -51,10 +51,8 @@ body {
 }
 
 .songs-list {
-  width: 100%;
-  margin-top: 50px;
-  margin: 0 auto;
-  height: 550px;
+  width: 100%;;
+  min-height: 300px;
   background: rgba(0, 0, 0, 0.5);
   padding: 20px 10px;
 }
