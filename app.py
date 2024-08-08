@@ -21,7 +21,7 @@ udp_sender = UDPSender()
 def remove_old_files():
     current_time = time.time()
     directory = 'static/videos'
-    minutes = 5
+    minutes = 10
 
     for filename in os.listdir(directory):
         file_path = os.path.join(directory, filename)
@@ -58,7 +58,7 @@ def handle_message(message):
 
 @app.route('/send_music_test', methods=['GET'])
 def send_music_test():
-    message = "start,Fall-Out-Boy-Sugar-We_re-Goin-Down"
+    message = "start,BetterPlace_TrollsBandTogether"
     udp_sender.send(message)
     return "Message sent!"
 
@@ -153,7 +153,7 @@ def save_video():
         ws.call(requests.StartRecording())
         print("Gravação iniciada")
 
-        time.sleep(10)
+        time.sleep(15)
         ws.call(requests.StopRecording())
         print("Gravação parada")
 
