@@ -28,3 +28,17 @@ function closeModalTerms() {
 
   overlay.classList.add("remove-overlay");
 }
+
+const termsBox = document.querySelector(".terms ");
+
+if (termsBox) {
+  termsBox.addEventListener("scroll", function () {
+    const scrollTop = termsBox.scrollTop;
+    const scrollHeight = termsBox.scrollHeight;
+    const clientHeight = termsBox.clientHeight;
+
+    if (scrollTop + clientHeight >= scrollHeight) {
+      document.querySelector("#privacy").disabled = false;
+    }
+  });
+}
