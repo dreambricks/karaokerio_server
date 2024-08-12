@@ -37,11 +37,12 @@ body {
 
 .music-title {
   width: 100%;
+  margin-bottom: 2em;
 }
 
 .music-title h1 {
   font-size: 60px;
-  color: #69faed;
+  color: #69faed00;
 }
 
 .music-title h2 {

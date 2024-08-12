@@ -1,6 +1,6 @@
 @font-face {
   font-family: kallisto;
-  src: url("../font/kallisto-bold-italic/kallisto-bold-italic.woff2");
+  src: url("../font/kallisto-medium/kallisto-medium.woff2");
 }
 
 * {
@@ -22,11 +22,9 @@ body {
 }
 
 .container {
-  height: 80vh;
   max-width: 90%;
   margin: 0 auto;
   width: 100%;
-
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -37,14 +35,25 @@ body {
 
 .terms {
   width: 100%;
-  color: #69faed;
+  height: 450px;
+  margin-top: 30px;
+  color: #ffffff;
   overflow-y: scroll;
-  padding: 30px 20px 20px;
   box-sizing: border-box;
 }
 
 .terms p {
-  font-size: 43px;
+  font-size: 24px;
+  padding: 30px 20px 20px;
+  max-height: 500px;
+  text-align: justify;
+}
+
+  .terms h1 {
+  font-size: 24px;
+  padding: 0px 20px 0px;
+  max-height: 500px;
+  text-align: justify;
 }
 
 /* width */
